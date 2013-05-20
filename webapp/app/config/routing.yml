@@ -1,0 +1,4 @@
+cgfie_inscriptions:
+    resource: "@CgfieInscriptionsBundle/Resources/config/routing.yml"
+    prefix:   /
+

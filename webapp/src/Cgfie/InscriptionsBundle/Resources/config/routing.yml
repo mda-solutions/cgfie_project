@@ -1,0 +1,3 @@
+cgfie_inscriptions_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: CgfieInscriptionsBundle:Default:index }
