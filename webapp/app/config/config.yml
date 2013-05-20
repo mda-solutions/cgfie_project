@@ -88,7 +88,7 @@ sonata_block:
             #sonata.media.block.feature_media:        
 
 sonata_admin:
-    title: CGFIE Panel
+    title: CGFIE
     title_logo: /bundles/cgfieinscriptions/images/cgfie_logo.jpg
     templates:
        # default global templates

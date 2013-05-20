@@ -1,4 +1,5 @@
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
 {% block stylesheets %}
 	<!-- jQuery code -->
 	<link rel="stylesheet" href="{{ asset('bundles/sonatajquery/themes/flick/jquery-ui-1.8.16.custom.css') }}" type="text/css" media="all" />
@@ -10,4 +11,10 @@
 	<link rel="stylesheet" href="{{ asset('bundles/sonataadmin/css/layout.css') }}" type="text/css" media="all" />
 	<link rel="stylesheet" href="{{ asset('bundles/sonataadmin/css/colors.css') }}" type="text/css" media="all" />            
     <link rel="stylesheet" href="{{ asset('bundles/cgfieinscriptions/css/theme.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block logo %}
+    <a href="{{ url('sonata_admin_dashboard') }}" class="brand">
+        <img src="{{ asset(admin_pool.titlelogo) }}"  alt="{{ admin_pool.title }}" />
+    </a>
 {% endblock %}
