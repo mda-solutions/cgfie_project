@@ -3,6 +3,7 @@
 namespace Cgfie\InscriptionsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * CgfieEntity
@@ -25,6 +26,7 @@ class CgfieEntity
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=100)
+     * @Assert\NotBlank  
      */
     private $name;
 
@@ -32,6 +34,7 @@ class CgfieEntity
      * @var string
      *
      * @ORM\Column(name="acronym", type="string", length=50)
+     * @Assert\NotBlank  
      */
     private $acronym;
 
@@ -39,6 +42,7 @@ class CgfieEntity
      * @var string
      *
      * @ORM\Column(name="level", type="string", length=100)
+     * @Assert\NotBlank  
      */
     private $level;
 

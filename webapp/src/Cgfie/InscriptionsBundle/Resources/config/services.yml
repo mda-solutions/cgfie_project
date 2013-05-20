@@ -34,3 +34,14 @@ services:
             - 'SonataAdminBundle:CRUD'    
         calls:
             - [ setTranslationDomain, [CgfieInscriptionsBundle]]
+
+    cgfie_inscriptions.admin.training_area:
+        class: Cgfie\InscriptionsBundle\Admin\TrainingAreaAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CGFIE, label: "Áreas de Formación" }
+        arguments:
+            - ~ 
+            - Cgfie\InscriptionsBundle\Entity\TrainingArea
+            - 'SonataAdminBundle:CRUD'    
+        calls:
+            - [ setTranslationDomain, [CgfieInscriptionsBundle]]
