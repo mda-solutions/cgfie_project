@@ -92,7 +92,8 @@ sonata_admin:
     title_logo: /bundles/cgfieinscriptions/images/cgfie_logo.jpg
     templates:
        # default global templates
-       layout: SonataAdminBundle::standard_layout.html.twig
+       #layout: SonataAdminBundle::standard_layout.html.twig
+       layout: CgfieInscriptionsBundle::admin.html.twig
        ajax: SonataAdminBundle::ajax_layout.html.twig
 
        # default actions templates, should extend a global templates
