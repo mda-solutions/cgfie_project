@@ -1,4 +1,8 @@
-/web/bundles/
+/web/bundles/acmedemo
+/web/bundles/framework
+/web/bundles/sensiodistribution
+/web/bundles/sonataadmin
+/web/bundles/sonatajquery
 /app/bootstrap.php.cache
 /app/cache/*
 /app/logs/*
