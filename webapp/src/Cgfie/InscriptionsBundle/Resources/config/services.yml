@@ -23,3 +23,14 @@ services:
             - 'SonataAdminBundle:CRUD'    
         calls:
             - [ setTranslationDomain, [CgfieInscriptionsBundle]]
+
+    cgfie_inscriptions.admin.cgfie_entity:
+        class: Cgfie\InscriptionsBundle\Admin\CgfieEntityAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CGFIE, label: "Unidades de Procedencia" }
+        arguments:
+            - ~ 
+            - Cgfie\InscriptionsBundle\Entity\CgfieEntity
+            - 'SonataAdminBundle:CRUD'    
+        calls:
+            - [ setTranslationDomain, [CgfieInscriptionsBundle]]
