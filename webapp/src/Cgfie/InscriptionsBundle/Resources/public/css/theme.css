@@ -1,0 +1,19 @@
+DIV.navbar-inner
+{
+	height: 75px;
+}
+
+.sonata-bc a.brand img
+{
+	height: 70px !important;
+}
+
+ul.nav, div.navbar-text
+{
+	top:30px;
+}
+
+div.container-fluid:nth-child(2)	
+{
+	margin-top:30px;	
+}
