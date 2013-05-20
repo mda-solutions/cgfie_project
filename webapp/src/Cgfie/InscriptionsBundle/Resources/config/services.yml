@@ -12,3 +12,14 @@ services:
             - 'SonataAdminBundle:CRUD'    
         calls:
             - [ setTranslationDomain, [CgfieInscriptionsBundle]]
+
+    cgfie_inscriptions.admin.course:
+        class: Cgfie\InscriptionsBundle\Admin\CourseAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: CGFIE, label: "Cursos" }
+        arguments:
+            - ~ 
+            - Cgfie\InscriptionsBundle\Entity\Course
+            - 'SonataAdminBundle:CRUD'    
+        calls:
+            - [ setTranslationDomain, [CgfieInscriptionsBundle]]
