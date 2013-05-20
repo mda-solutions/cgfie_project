@@ -15,6 +15,7 @@
 	        $formMapper
 	            ->add('name', null, array('label'=> 'Nombre'))
 	            ->add('mode', 'choice', array('label' => 'Modalidad','choices' => CourseConfig::getModes()))
+	            ->add('type', 'choice', array('label' => 'Tipo de Formación','choices' => CourseConfig::getTypes()))
 	            ->add('cur', null, array('label'=> 'Clave Unica de Registro'))
 	            ->add('hours', null, array('label'=> 'Duración (Hrs)'))
 
@@ -49,4 +50,18 @@
 		{
 			return array('Escolarizada', 'Mixta', 'No Escolarizada');
 		}
+
+		static public function getTypes()
+		{
+			return array(
+							 'Curso'
+							,'Diplomado'
+							,'Encuentro'
+							,'Taller'
+							,'Teleseminario'
+							,'Seminario'
+							,'Simposio'
+							,'Videoconferencia'													
+						);
+		}		
 	}

@@ -54,6 +54,14 @@ class Course
      */
     private $hours;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=100)
+     * @Assert\NotBlank 
+     */
+    private $type;
+
 
     /**
      * Get id
@@ -156,4 +164,27 @@ class Course
     {
         return $this->hours;
     }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Course
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Get hours
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }    
 }
