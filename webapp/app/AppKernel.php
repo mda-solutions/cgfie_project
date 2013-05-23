@@ -29,6 +29,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new Bmatzner\FoundationBundle\BmatznerFoundationBundle(),
+            //new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
 
         );
 

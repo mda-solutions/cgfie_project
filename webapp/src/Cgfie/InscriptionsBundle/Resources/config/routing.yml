@@ -1,3 +1,7 @@
 cgfie_inscriptions_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: CgfieInscriptionsBundle:Default:index }
+
+cgfie_inscriptions_format06:
+    pattern:  /formato_acciones_formacion/
+    defaults: { _controller: CgfieInscriptionsBundle:Default:format06 }

@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('CgfieInscriptionsBundle:Default:index.html.twig', array('name' => $name));
     }
+
+    public function format06Action()
+    {
+    	return $this->render('CgfieInscriptionsBundle:Default:format06.html.twig');
+    }
 }
