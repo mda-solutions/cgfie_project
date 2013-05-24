@@ -3,7 +3,7 @@
 
 	use Doctrine\Common\DataFixtures\FixtureInterface;
 	use Doctrine\Common\Persistence\ObjectManager;
-	use Acme\HelloBundle\Entity\User;
+	use Cgfie\InscriptionsBundle\Entity\CgfieUsers;
 
 	class LoadCgfieUsersData implements FixtureInterface
 	{
@@ -115,12 +115,24 @@
 							'XABIER'
 					);
 
+			for ($i=0; $i < 100 ; $i++) 
+			{ 
+				$user = new CgfieUsers();
 
-	        $userAdmin = new User();
-	        $userAdmin->setUsername('admin');
-	        $userAdmin->setPassword('test');
+				$user->setName($names[array_rand($names)]);
+				$user->setLastname($names[array_rand($names)]);
+				$user->setLastname2($names[array_rand($names)]);
+				$user->setEmployeeNumber($names[array_rand($names)]);
+				$user->setEmail('moises.rangel@gmail.com');
+				$user->setEmailIpn('moises.rangel@gmail.com');
+				$user->setGender('MASCULINO');
+				$user->setLevel('SUPERIOR');
+				$user->setType('TEST');
 
-	        $manager->persist($userAdmin);
-	        $manager->flush();
+		        $manager->persist($user);
+		        $manager->flush();			
+
+			}
+
 	    }
 	}
