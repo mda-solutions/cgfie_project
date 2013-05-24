@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> Zurb </title>
+    <title> CGFIE  06 </title>
     
     <!-- Zurb Foundation-->
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfoundation/css/foundation.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cgfieinscriptions/css/metallic.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cgfieinscriptions/select2/select2.css') }}" />
 
     <!--required JS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/js/zebra_datepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/select2/select2.js') }}"></script>
 
   </head>
   <body>
@@ -59,7 +61,7 @@
 
                <div class="large-6 columns">
                   <label for="course_teacher">Seleccione el facilitador</label>
-                  <select id="course_teacher" name="course_teacher" class="large">
+                  <select id="course_teacher" name="course_teacher" class="large" data-customforms="disabled">
                     <option value="0">- Seleccione un opción -</option>
                     {% for user in USERS %}
                         <option value="{{user.id}}"> {{user.name}} {{user.lastname}} {{user.lastname2}}</option>
@@ -92,12 +94,27 @@
 
     </form>
   <script>
-    $(function(){
-      
-      $(document).foundation();
+    $(function()
+    {
 
-      $('#course_date_start').Zebra_DatePicker();
-      $('#course_date_end').Zebra_DatePicker();
+      $(document).foundation(); 
+    
+      $('#course_date_start').Zebra_DatePicker(
+        {
+          direction: true,
+          pair: $('#course_date_end')
+        });
+
+      $('#course_date_end').Zebra_DatePicker(
+        {
+          direction: 1
+        });
+
+      $('#course_teacher').select2(
+        {
+            placeholder: "Seleccione un facilitador",
+            allowClear: true          
+        });
 
       $('#courseID').on('change', function()
       {
