@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class CourseRepository extends EntityRepository
 {
+	protected $repository;
+
+	public function __construct()
+	{
+		$this->repository =  $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:Course');
+	}
+
+	public function getAllCourses()
+	{		
+		return $this->repository->findAll();
+	}
 }

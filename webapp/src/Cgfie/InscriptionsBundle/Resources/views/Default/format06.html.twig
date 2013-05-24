@@ -1,14 +1,125 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bootstrap 101 Template</title>
+    <title> Zurb </title>
+    
     <!-- Zurb Foundation-->
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfoundation/css/foundation.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cgfieinscriptions/css/metallic.css') }}" />
+
+    <!--required JS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/js/zebra_datepicker.js') }}"></script>
+
   </head>
   <body>
-    <h1>Acta de Evaluación de la Acción de Formación Para el Personal del IPN</h1>    
+    <h2>Evaluación de la Acción de Formación</h2>    
+    <form class="custom">
+        <fieldset>
+          <legend>Acción de Formación</legend>
+          <div class="row">
+            <div class="large-12 columns">
 
+              <label for="courseID">Seleccione la Acción de formación</label>
+              <select id="courseID" name="courseID" class="large">
+                <option value="0">- Seleccione un opción -</option>
+                {% for course in COURSES %}
+                    <option value="{{course.id}}"> {{course.name}} </option>>
+                {% endfor %}
+              </select>
+
+              <img id="loader" src="{{ asset('bundles/cgfieinscriptions/images/ajax-loader.gif') }}" style="display:none;position: absolute;top: 25px;left: 395px;"/>
+
+            </div>
+          </div>
+            <div class="row">
+               <div class="large-6 columns">
+                  <label>Clave única de Registro: (CUR)</label>
+                  <input id="course_cur" name="course_cur" type="text" disabled="true">                  
+               </div>
+
+               <div class="large-6 columns">
+                  <label for="course_entity">Seleccione la Sede</label>
+                  <select id="course_entity" name="course_entity" class="large">
+                    <option value="0">- Seleccione un opción -</option>
+                    {% for entity in ENTITTIES %}
+                        <option value="{{entity.id}}"> {{entity.name}} </option>>
+                    {% endfor %}
+                  </select>
+               </div>
+
+            </div>
+
+            <div class="row">
+               <div class="large-6 columns">
+                  <label>Modalidad:</label>
+                  <input type="text" disabled="true" id="course_mode" name="course_mode">                  
+               </div>
+
+               <div class="large-6 columns">
+                  <label for="course_teacher">Seleccione el facilitador</label>
+                  <select id="course_teacher" name="course_teacher" class="large">
+                    <option value="0">- Seleccione un opción -</option>
+                    {% for user in USERS %}
+                        <option value="{{user.id}}"> {{user.name}} {{user.lastname}} {{user.lastname2}}</option>
+                    {% endfor %}
+                  </select>
+               </div>
+
+            </div>            
+
+            <div class="row">
+               <div class="large-6 columns">
+                  <label>Total de horas:</label>
+                  <input type="text" disabled="true" id="course_hours" name="course_hours">                  
+               </div>
+
+               <div class="large-3 columns">
+                  <label>Fecha de inicio:</label>
+                  <input type="text"  id="course_date_start" name="course_date_start">                  
+               </div>               
+
+               <div class="large-3 columns">
+                  <label>Fecha de término:</label>
+                  <input type="text"  id="course_date_end" name="course_date_end">                  
+               </div>                              
+            </div>                        
+
+          </div>
+       </fieldset>
+
+
+    </form>
+  <script>
+    $(function(){
+      
+      $(document).foundation();
+
+      $('#course_date_start').Zebra_DatePicker();
+      $('#course_date_end').Zebra_DatePicker();
+
+      $('#courseID').on('change', function()
+      {
+          var _url = "{{ path('cgfie_inscriptions_course') }}/" + $(this).val();
+          $('#loader').fadeIn('fast');
+          $.ajax({
+            dataType: "json",
+            url: _url,
+            success: function(data)
+            {
+
+              $('#course_cur').val(data.cur);
+              $('#course_mode').val(data.mode);
+              $('#course_hours').val(data.hours);
+
+              $('#loader').fadeOut('fast');
+            }
+          });        
+
+      });
+
+    })
+  </script>
   </body>
 </html>

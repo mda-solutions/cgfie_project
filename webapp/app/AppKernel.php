@@ -30,6 +30,9 @@ class AppKernel extends Kernel
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new Bmatzner\FoundationBundle\BmatznerFoundationBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+    
             //new Bc\Bundle\BootstrapBundle\BcBootstrapBundle(),
 
         );
