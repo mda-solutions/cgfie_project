@@ -10,72 +10,67 @@
 
     <!--required JS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!--script src="//knockoutjs.com/downloads/knockout-2.2.1.js"></script-->
     <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/js/zebra_datepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/select2/select2.js') }}"></script>
 
   </head>
   <body>
+    <img id="loader" src="{{ asset('bundles/cgfieinscriptions/images/ajax-loader.gif') }}" style="display:none;position: absolute;top: 25px;left: 395px;"/>
+
     <h2>Evaluación de la Acción de Formación</h2>    
     <form class="custom">
-        <fieldset>
+        <fieldset id="step01" >
           <legend>Acción de Formación</legend>
           <div class="row">
-            <div class="large-12 columns">
+            <div class="large-6 columns">
 
-              <label for="courseID">Seleccione la Acción de formación</label>
-              <select id="courseID" name="courseID" class="large">
-                <option value="0">- Seleccione un opción -</option>
+              <label for="courseID">Acción de formación:</label>
+              <select id="courseID" name="courseID" class="large" data-customforms="disabled">
+                <option value="0">- Seleccione -</option>
                 {% for course in COURSES %}
                     <option value="{{course.id}}"> {{course.name}} </option>>
                 {% endfor %}
-              </select>
-
-              <img id="loader" src="{{ asset('bundles/cgfieinscriptions/images/ajax-loader.gif') }}" style="display:none;position: absolute;top: 25px;left: 395px;"/>
+              </select>             
 
             </div>
+
+            <div class="large-6 columns">
+              <label>Modalidad:</label>
+              <input type="text" disabled="true" id="course_mode" name="course_mode">                  
+            </div>
+
+          </div>  
+
+          <div class="row">
+            <div class="large-6 columns">
+                <label for="course_entity">Sede:</label>
+                <select id="course_entity" name="course_entity" class="large" data-customforms="disabled">
+                  <option value="0">- Seleccione -</option>
+                  {% for entity in ENTITTIES %}
+                      <option value="{{entity.id}}"> {{entity.name}} ({{entity.acronym}}) </option>>
+                  {% endfor %}
+                </select>                
+            </div>
+
+            <div class="large-6 columns">
+              <label>Total de horas:</label>
+              <input type="text" disabled="true" id="course_hours" name="course_hours">                                
+            </div>
+
           </div>
-            <div class="row">
-               <div class="large-6 columns">
-                  <label>Clave única de Registro: (CUR)</label>
-                  <input id="course_cur" name="course_cur" type="text" disabled="true">                  
-               </div>
 
-               <div class="large-6 columns">
-                  <label for="course_entity">Seleccione la Sede</label>
-                  <select id="course_entity" name="course_entity" class="large">
-                    <option value="0">- Seleccione un opción -</option>
-                    {% for entity in ENTITTIES %}
-                        <option value="{{entity.id}}"> {{entity.name}} ({{entity.acronym}}) </option>>
-                    {% endfor %}
-                  </select>
-               </div>
-
+          <div class="row">
+            <div class="large-6 columns">
+                <label for="course_teacher">Facilitador:</label>
+                <select id="course_teacher" name="course_teacher" class="large" data-customforms="disabled">
+                  <option value="0">- Seleccione -</option>
+                  {% for user in USERS %}
+                      <option value="{{user.id}}"> {{user.name}} {{user.lastname}} {{user.lastname2}}</option>
+                  {% endfor %}
+                </select>
             </div>
-
-            <div class="row">
-               <div class="large-6 columns">
-                  <label>Modalidad:</label>
-                  <input type="text" disabled="true" id="course_mode" name="course_mode">                  
-               </div>
-
-               <div class="large-6 columns">
-                  <label for="course_teacher">Seleccione el facilitador</label>
-                  <select id="course_teacher" name="course_teacher" class="large" data-customforms="disabled">
-                    <option value="0">- Seleccione un opción -</option>
-                    {% for user in USERS %}
-                        <option value="{{user.id}}"> {{user.name}} {{user.lastname}} {{user.lastname2}}</option>
-                    {% endfor %}
-                  </select>
-               </div>
-
-            </div>            
-
-            <div class="row">
-               <div class="large-6 columns">
-                  <label>Total de horas:</label>
-                  <input type="text" disabled="true" id="course_hours" name="course_hours">                  
-               </div>
 
                <div class="large-3 columns">
                   <label>Fecha de inicio:</label>
@@ -85,8 +80,19 @@
                <div class="large-3 columns">
                   <label>Fecha de término:</label>
                   <input type="text"  id="course_date_end" name="course_date_end">                  
-               </div>                              
-            </div>                        
+               </div> 
+          </div>
+
+
+            <div class="row">
+               <div class="large-6 columns">
+                  <label>Clave única de Registro: (CUR)</label>
+                  <input id="course_cur" name="course_cur" type="text" disabled="true">                  
+               </div>
+            </div>
+
+            
+
 
           </div>
        </fieldset>
@@ -116,10 +122,48 @@
             allowClear: true          
         });
 
+      $('#courseID').select2(
+        {
+            placeholder: "Seleccione una acción de formación",
+            allowClear: true          
+        });      
+
+      $('#course_entity').select2(
+        {
+            placeholder: "Seleccione una sede",
+            allowClear: true          
+        });      
+
       $('#courseID').on('change', function()
       {
           var _url = "{{ path('cgfie_inscriptions_course') }}/" + $(this).val();
-          $('#loader').fadeIn('fast');
+          
+
+          $("fieldset#step01").append('<div id="overlay"></div>');
+          
+          var overlay = $('#overlay')
+          overlay.css('width', $(document).width());
+          overlay.css('height', $(document).height());
+          overlay.css('background-color', 'white');
+          overlay.css('position', 'fixed');
+          overlay.css('left', '0');
+          overlay.css('top', '0');
+          overlay.css('opacity', '.8');
+          overlay.css('z-index', '100');
+          overlay.fadeIn('fast');
+
+          var loader = $('#loader');
+          loader.fadeIn();
+          loader.css('margin-left', 'auto');
+          loader.css('margin-right', 'auto');
+          loader.css('margin-top', 'auto');
+          loader.css('left', '0');
+          loader.css('right', '0');
+          loader.css('top', '50%');
+          loader.css('position', 'absolute');
+          loader.css('z-index', '9999');
+          
+
           $.ajax({
             dataType: "json",
             url: _url,
@@ -131,6 +175,11 @@
               $('#course_hours').val(data.hours);
 
               $('#loader').fadeOut('fast');
+              overlay.fadeOut('fast', function()
+                {
+                  //$('#overlay').remove();
+                });
+
             }
           });        
 
