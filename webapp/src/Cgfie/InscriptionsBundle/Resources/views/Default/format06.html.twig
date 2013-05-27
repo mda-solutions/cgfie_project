@@ -10,10 +10,33 @@
 
     <!--required JS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <!--script src="//knockoutjs.com/downloads/knockout-2.2.1.js"></script-->
+    <script src="//knockoutjs.com/downloads/knockout-2.2.1.js"></script>
     <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/js/zebra_datepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/select2/select2.js') }}"></script>
+
+  <style>
+
+      BODY, HTML
+      {
+        overflow-x: hidden;
+      }
+
+      #step02 div.row_odd:hover
+      {
+        /*background-color: #F0F0F0; color: #666666;*/
+      }
+
+     .row_even
+     {
+      background-color: #F0F0F0; color: #666666;
+     }
+
+     .row_odd
+     {
+      background-color: #0694C8; color: white;      
+     }     
+  </style>
 
   </head>
   <body>
@@ -97,13 +120,173 @@
           </div>
        </fieldset>
 
+        <fieldset id="step02" >
+          <legend>Participantes</legend>
 
+          <div class="row">
+            <div class="large-6 columns">
+                <label for="course_pupil">Usuarios CGFIE:</label>
+                <select id="course_pupil" name="course_pupil" class="large" data-customforms="disabled">
+                  <option value="0">- Seleccione -</option>
+                  {% for user in USERS %}
+                      <option value="{{user.id}}"> {{user.name}} {{user.lastname}} {{user.lastname2}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+
+            <div class="large-3 columns" style="padding-top:18px;">
+              <a id="add_pupil" href="#" class="button small radius success"  data-bind="click: addPupil">Agregar al listado</a>
+            </div>
+
+            <div class="large-3 columns"  style="padding-top:18px;">
+              <a id="add_pupil" href="#" class="button small radius">Dar de alta un participante</a>
+            </div>            
+        </div>
+
+        <div class="row">
+          <div class="large-12 columns" style="height:25px;">
+
+          </div>
+        </div>
+
+
+<div class="row">
+  <div class="large-12 columns">
+       <div class="row row_even">
+          <div class="large-1 columns">
+            &nbsp;
+          </div>                
+          <div class="large-5 columns">
+            Participante:
+          </div>        
+          <div class="large-2 columns">
+            Asistencia:
+          </div>        
+          <div class="large-2 columns">
+          Acreditación:
+          </div>        
+          <div class="large-2 columns">
+          Calificación:
+          </div>                                      
+
+       </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="large-12 columns">
+
+        <div class="row row_odd" data-bind="foreach: pupils">
+          <input type="hidden" name="pupils[]" value="" data-bind="value: id">
+          <div class="large-1 columns" style="padding-top:18px">
+            <input type="checkbox" data-customforms="disabled" class="selected_items"/>
+          </div>
+          <div class="large-5 columns" style="padding-top:18px" data-bind="text: name">
+            
+          </div>
+          <div class="large-6 columns">
+
+            <div class="row" >
+              <div class="large-3 columns" style="padding-top:18px; display: inline;">   
+                    <select >
+                        <option value="0">-Seleccione-</option>
+                        {% for number in PERCENTS %}
+                            <option value="{{number}}"> {{number}} % </option>>
+                        {% endfor %}
+                    </select>
+              </div>
+
+              <div class="large-3 columns" style="padding-top:18px;margin-left: 40px;">
+                    <select>
+                        <option value="0">-Seleccione-</option>
+                        {% for number in AGREE %}
+                            <option value="{{number}}"> {{number}}</option>>
+                        {% endfor %}
+                    </select>                  
+              </div>
+
+              <div class="large-3 columns" style="padding-top:18px;margin-right: 40px;">
+                    <select>
+                        <option value="0">-Seleccione-</option>
+                        {% for number in CALS|keys %}
+                            <option value="{{number}}"> {{number}}</option>>
+                        {% endfor %}
+                    </select>     
+              </div>                            
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-12 columns" style="padding-top:20px;">
+            <a href="javascript:void(0);" id="remove_pupils" class="small button radius" data-bind="click: removePupil" style="display:none;">Quitar de la lista</a>
+          </div>
+        </div>
+
+  </div>
+</div>
+        </fieldset>
     </form>
   <script>
     $(function()
     {
 
       $(document).foundation(); 
+
+      //KOUT
+      function Pupil(name, id) {
+          var self = this;
+          self.name = name;
+          self.id = id;
+      }
+
+      var PupilListModel = function(items)
+      {
+        
+        var self = this;
+        
+        self.pupils = ko.observableArray([]);
+
+        // Operations
+        self.addPupil = function() 
+        {
+          var name = $('#course_pupil').select2('data').text;
+          var id   = $('#course_pupil').val();
+
+          self.pupils.push(new Pupil(name, id));
+
+          $('.selected_items').change(function()
+          {
+              var button = $('#remove_pupils');
+              var values = $('input:checkbox:checked.selected_items').map(function () {
+                return this.value;
+              }).get();
+              if(values.length) 
+              {
+                button.fadeIn('fast');
+              }else
+              {
+                button.fadeOut('fast');
+              }
+              
+          });            
+
+        }
+
+        self.removePupil = function(id)
+        {
+         
+        }
+
+
+      };
+
+      ko.applyBindings(new PupilListModel());
+
+      //END knockoutjs
+
     
       $('#course_date_start').Zebra_DatePicker(
         {
@@ -122,6 +305,12 @@
             allowClear: true          
         });
 
+      $('#course_pupil').select2(
+        {
+            placeholder: "Seleccione",
+            allowClear: true          
+        });      
+
       $('#courseID').select2(
         {
             placeholder: "Seleccione una acción de formación",
@@ -133,6 +322,12 @@
             placeholder: "Seleccione una sede",
             allowClear: true          
         });      
+
+      $('#course_pupil').change(function()
+      {
+          //var val =  $(this).select2('data').text;
+          //console.log(val);
+      });          
 
       $('#courseID').on('change', function()
       {
@@ -162,8 +357,7 @@
           loader.css('top', '50%');
           loader.css('position', 'absolute');
           loader.css('z-index', '9999');
-          
-
+               
           $.ajax({
             dataType: "json",
             url: _url,
@@ -176,9 +370,9 @@
 
               $('#loader').fadeOut('fast');
               overlay.fadeOut('fast', function()
-                {
-                  //$('#overlay').remove();
-                });
+              {
+                $('#overlay').remove();
+              });
 
             }
           });        
