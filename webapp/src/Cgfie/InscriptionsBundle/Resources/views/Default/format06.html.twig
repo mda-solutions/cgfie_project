@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfoundation/css/foundation.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cgfieinscriptions/css/metallic.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cgfieinscriptions/select2/select2.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cgfieinscriptions/js/jgrowl/jquery.jgrowl.css') }}" />
 
     <!--required JS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -14,6 +15,7 @@
     <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/js/zebra_datepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/select2/select2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cgfieinscriptions/js/jgrowl/jquery.jgrowl.js') }}"></script>
 
   <style>
 
@@ -134,13 +136,17 @@
                 </select>
             </div>
 
-            <div class="large-3 columns" style="padding-top:18px;">
+            <div class="large-2 columns" style="padding-top:10px;">
               <a id="add_pupil" href="#" class="button small radius success"  data-bind="click: addPupil">Agregar al listado</a>
             </div>
 
-            <div class="large-3 columns"  style="padding-top:18px;">
+            <div class="large-2 columns"  style="padding-top:10px;">
               <a id="add_pupil" href="#" class="button small radius">Dar de alta un participante</a>
             </div>            
+
+            <div class="large-2 columns"  style="padding-top:18px;">
+              &nbsp;
+            </div>                        
         </div>
 
         <div class="row">
@@ -180,7 +186,7 @@
         <div class="row row_odd" data-bind="foreach: pupils">
           <input type="hidden" name="pupils[]" value="" data-bind="value: id">
           <div class="large-1 columns" style="padding-top:18px">
-            <input type="checkbox" data-customforms="disabled" class="selected_items"/>
+            <input type="checkbox" data-customforms="disabled" class="selected_items" value="" data-bind="value: id"/>
           </div>
           <div class="large-5 columns" style="padding-top:18px" data-bind="text: name">
             
@@ -255,7 +261,19 @@
           var name = $('#course_pupil').select2('data').text;
           var id   = $('#course_pupil').val();
 
-          self.pupils.push(new Pupil(name, id));
+          var match = ko.utils.arrayFirst(self.pupils(), function(item)
+          {
+              return id === item.id;
+          });          
+
+          if(!match)
+          {
+            self.pupils.push(new Pupil(name, id));  
+          }else
+          {
+
+            $.jGrowl("Ya existe el participante.");
+          }
 
           $('.selected_items').change(function()
           {
@@ -275,9 +293,29 @@
 
         }
 
-        self.removePupil = function(id)
+        self.removePupil = function()
         {
-         
+
+          var values = $('input:checkbox:checked.selected_items').map(function () {
+            return this.value;
+          }).get();
+
+          if(values.length > 0) 
+          {
+            $.each(values, function(index, val)
+            {
+              var match = ko.utils.arrayFirst(self.pupils(), function(item) {
+                  return item.id;
+              }); 
+
+              if (match) {
+                self.pupils.remove(match);
+                $('#remove_pupils').fadeOut('fast');
+                $.jGrowl("Se quitó el participante: " + val);
+              }
+              
+            });
+          }
         }
 
 
@@ -322,12 +360,7 @@
             placeholder: "Seleccione una sede",
             allowClear: true          
         });      
-
-      $('#course_pupil').change(function()
-      {
-          //var val =  $(this).select2('data').text;
-          //console.log(val);
-      });          
+       
 
       $('#courseID').on('change', function()
       {
