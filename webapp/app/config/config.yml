@@ -93,7 +93,7 @@ sonata_block:
 
 sonata_admin:
     title: CGFIE
-    title_logo: /bundles/cgfieinscriptions/images/cgfie_logo.jpg
+    title_logo: cgfie_logo.jpg
     templates:
        # default global templates
        #layout: SonataAdminBundle::standard_layout.html.twig
