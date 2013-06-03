@@ -4,9 +4,13 @@ namespace Cgfie\InscriptionsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
 use Doctrine\ORM\EntityRepository;
+
 use Cgfie\InscriptionsBundle\Entity\Inscription;
 use Cgfie\InscriptionsBundle\Entity\CgfieEntity;
+
 
 class DefaultController extends Controller
 {
@@ -64,19 +68,19 @@ class DefaultController extends Controller
     	return new Response($serializer->serialize($course, 'json'));
     }
 
-    public function addinscriptionAction()
+    public function addinscriptionAction(Request $request)
     {
-        $course         = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:Course')->find(1);
-        $cgfieentity    = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieEntity')->find(3);
-        $teacher        = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieUsers')->find(1);
+        $course         = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:Course')->find($request->request->get('course_id'));
+        $cgfieentity    = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieEntity')->find($request->request->get('entity_id'));
+        $teacher        = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieUsers')->find($request->request->get('teacher_id'));
         
 
         $inscription = new Inscription();            
         $inscription->setCourse($course);
         $inscription->setCgfieEntity($cgfieentity);
         $inscription->setTeacher($teacher);
-        $inscription->setBeginDate(new \DateTime("now"));
-        $inscription->setEndDate(new \DateTime("now"));
+        $inscription->setBeginDate(new \DateTime($request->request->get('begin')));
+        $inscription->setEndDate(new \DateTime($request->request->get('end')));
             
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($inscription);

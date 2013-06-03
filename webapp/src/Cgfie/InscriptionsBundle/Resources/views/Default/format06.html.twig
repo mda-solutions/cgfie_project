@@ -335,12 +335,14 @@
       $('#course_date_start').Zebra_DatePicker(
         {
           direction: true,
-          pair: $('#course_date_end')
+          pair: $('#course_date_end'),
+          format: 'Y-m-d'
         });
 
       $('#course_date_end').Zebra_DatePicker(
         {
-          direction: 1
+          direction: 1,
+          format: 'Y-m-d'
         });
 
       $('#course_teacher').select2(
@@ -397,7 +399,7 @@
           var _url = "{{ path('cgfie_inscriptions_course') }}/" + $(this).val();          
 
           $("fieldset#step01").append('<div id="overlay"></div>');
-                    
+
           var overlay = $('#overlay')
           overlay.css('width', $(document).width());
           overlay.css('height', $(document).height());
