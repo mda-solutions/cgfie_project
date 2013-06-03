@@ -18,6 +18,7 @@
 	            ->add('teacher', 'sonata_type_model', array('label' => 'Facilitador'), array())
 	            ->add('begin_date', 'date', array('label' => 'Fecha de Inicio'), array())
 	            ->add('end_date', 'date', array('label' => 'Fecha de Fin'), array())
+	            ->add('users', 'sonata_type_model', array('label' => 'Participantes', 'multiple' => true, 'expanded'=>true), array())
 	        ;
 	    }
 
