@@ -5,6 +5,8 @@ namespace Cgfie\InscriptionsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityRepository;
+use Cgfie\InscriptionsBundle\Entity\Inscription;
+use Cgfie\InscriptionsBundle\Entity\CgfieEntity;
 
 class DefaultController extends Controller
 {
@@ -60,5 +62,28 @@ class DefaultController extends Controller
     	$course = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:Course')->find($id);
     	$serializer = $this->container->get('serializer');
     	return new Response($serializer->serialize($course, 'json'));
+    }
+
+    public function addinscriptionAction()
+    {
+        $course         = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:Course')->find(1);
+        $cgfieentity    = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieEntity')->find(3);
+        $teacher        = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieUsers')->find(1);
+        
+
+        $inscription = new Inscription();            
+        $inscription->setCourse($course);
+        $inscription->setCgfieEntity($cgfieentity);
+        $inscription->setTeacher($teacher);
+        $inscription->setBeginDate(new \DateTime("now"));
+        $inscription->setEndDate(new \DateTime("now"));
+            
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($inscription);
+        $em->flush();
+
+        $serializer = $this->container->get('serializer');
+        return new Response($serializer->serialize($inscription, 'json'));
+
     }
 }

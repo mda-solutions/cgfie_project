@@ -11,3 +11,7 @@ cgfie_inscriptions_format06:
 cgfie_inscriptions_course:
     pattern:  /accion_formacion/{id}
     defaults: { _controller: CgfieInscriptionsBundle:Default:courses, id: 0 }
+
+cgfie_inscriptions_add:
+    pattern:  admin/nuevo_formato
+    defaults: { _controller: CgfieInscriptionsBundle:Default:addinscription}
