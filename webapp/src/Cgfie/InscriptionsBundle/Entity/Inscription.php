@@ -34,20 +34,20 @@ class Inscription
     }
 
     /**
-     * @ORM\OneToOne(targetEntity="Course")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Course")
+     * @ORM\JoinColumn(name="course_id", referencedColumnName="id", nullable = false)
      **/
      private $course;       
 
     /**
-     * @ORM\OneToOne(targetEntity="CgfieEntity")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="CgfieEntity")
+     * @ORM\JoinColumn(name="entity_id", referencedColumnName="id", nullable = false)
      **/
      private $cgfie_entity;       
 
     /**
-     * @ORM\OneToOne(targetEntity="CgfieUsers")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="CgfieUsers")
+     * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id", nullable = false)
      **/
      private $teacher;    
 
@@ -66,6 +66,13 @@ class Inscription
      * @Assert\NotBlank     
      */
     private $end_date;                  
+
+
+    /**
+     * @var array users
+     * @ORM\OneToMany(targetEntity="InscriptionUsers", mappedBy = "Inscription", cascade={"all"})
+     */
+    protected $users;    
 
 
     /**
@@ -184,4 +191,44 @@ class Inscription
     }
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Cgfie\InscriptionsBundle\Entity\InscriptionUsers $users
+     * @return Inscription
+     */
+    public function addUser(\Cgfie\InscriptionsBundle\Entity\InscriptionUsers $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Cgfie\InscriptionsBundle\Entity\InscriptionUsers $users
+     */
+    public function removeUser(\Cgfie\InscriptionsBundle\Entity\InscriptionUsers $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
 }
