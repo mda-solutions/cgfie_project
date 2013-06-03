@@ -329,157 +329,157 @@
 			$entity50 = new stdClass();
 			$entity50->name = "Escuela Superior de Ingeniería Mecánica y Eléctrica";
 			$entity50->acronym = " ESIME Zacatenco";
-			$entity50->level = "Unidades Académicas del Nivel Superior";
+			$entity50->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity50);
 
 			$entity51 = new stdClass();
 			$entity51->name = "Escuela Superior de Ingeniería Mecánica y Eléctrica";
 			$entity51->acronym = " ESIME Culhuacan";
-			$entity51->level = "Unidades Académicas del Nivel Superior";
+			$entity51->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity51);
 
 			$entity52 = new stdClass();
 			$entity52->name = "Escuela Superior de Ingeniería Mecánica y Eléctrica";
 			$entity52->acronym = " ESIME Azcapotzalco";
-			$entity52->level = "Unidades Académicas del Nivel Superior";
+			$entity52->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity52);
 
 			$entity53 = new stdClass();
 			$entity53->name = "Escuela Superior de Ingeniería Mecánica y Eléctrica";
 			$entity53->acronym = " ESIME Ticoman";
-			$entity53->level = "Unidades Académicas del Nivel Superior";
+			$entity53->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity53);
 
 			$entity54 = new stdClass();
 			$entity54->name = "Escuela Superior de Ingeniería y Arquitectura";
 			$entity54->acronym = " ESIA Zacatenco";
-			$entity54->level = "Unidades Académicas del Nivel Superior";
+			$entity54->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity54);
 
 			$entity55 = new stdClass();
 			$entity55->name = "Escuela Superior de Ingeniería y Arquitectura";
 			$entity55->acronym = " ESIA Tecamachalco";
-			$entity55->level = "Unidades Académicas del Nivel Superior";
+			$entity55->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity55);
 
 			$entity56 = new stdClass();
 			$entity56->name = "Escuela Superior de Ingeniería y Arquitectura";
 			$entity56->acronym = " ESIA Ticoman";
-			$entity56->level = "Unidades Académicas del Nivel Superior";
+			$entity56->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity56);
 
 			$entity57 = new stdClass();
 			$entity57->name = "Escuela Superior de Ingeniería Textil";
 			$entity57->acronym = " ESIT ";
-			$entity57->level = "Unidades Académicas del Nivel Superior";
+			$entity57->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity57);
 
 			$entity58 = new stdClass();
 			$entity58->name = "Escuela Superior de Ingeniería Química e Industrias Extractivas";
 			$entity58->acronym = " ESIQIE Zacatenco";
-			$entity58->level = "Unidades Académicas del Nivel Superior";
+			$entity58->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity58);
 
 			$entity59 = new stdClass();
 			$entity59->name = "Escuela Superior de Física y Matemáticas";
 			$entity59->acronym = " ESFM Zacatenco";
-			$entity59->level = "Unidades Académicas del Nivel Superior";
+			$entity59->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity59);
 
 			$entity60 = new stdClass();
 			$entity60->name = "Escuela Superior de Cómputo";
 			$entity60->acronym = " ESCOM Zacatenco";
-			$entity60->level = "Unidades Académicas del Nivel Superior";
+			$entity60->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity60);
 
 			$entity61 = new stdClass();
 			$entity61->name = "Unidad Profesional Interdisciplinaria de Ingeniería y Ciencias Sociales y Administrativas";
 			$entity61->acronym = " UPIICSA ";
-			$entity61->level = "Unidades Académicas del Nivel Superior";
+			$entity61->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity61);
 
 			$entity62 = new stdClass();
 			$entity62->name = "Unidad Profesional Interdisciplinaria de Ingeniería y Tecnologías Avanzadas";
 			$entity62->acronym = " UPIITA ";
-			$entity62->level = "Unidades Académicas del Nivel Superior";
+			$entity62->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity62);
 
 			$entity63 = new stdClass();
 			$entity63->name = "Unidad Profesional Interdisciplinaria de Biotecnología";
 			$entity63->acronym = " UPIBI ";
-			$entity63->level = "Unidades Académicas del Nivel Superior";
+			$entity63->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity63);
 
 			$entity64 = new stdClass();
 			$entity64->name = "Unidad Profesional Interdisciplinaria de Ingeniería";
 			$entity64->acronym = " UPIIG Campus Guanajuato";
-			$entity64->level = "Unidades Académicas del Nivel Superior";
+			$entity64->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity64);
 
 			$entity65 = new stdClass();
 			$entity65->name = "Unidad Profesional Interdisciplinaria de Ingeniería";
 			$entity65->acronym = " UPIIZ Campus Zacatecas";
-			$entity65->level = "Unidades Académicas del Nivel Superior";
+			$entity65->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity65);
 
 			$entity66 = new stdClass();
 			$entity66->name = "Escuela Nacional de Ciencias Biológicas";
 			$entity66->acronym = " ENCB Zacatenco";
-			$entity66->level = "Unidades Académicas del Nivel Superior";
+			$entity66->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity66);
 
 			$entity67 = new stdClass();
 			$entity67->name = "Escuela Superior de Medicina";
 			$entity67->acronym = " ESM ";
-			$entity67->level = "Unidades Académicas del Nivel Superior";
+			$entity67->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity67);
 
 			$entity68 = new stdClass();
 			$entity68->name = "Escuela Nacional de Medicina y Homeopatía";
 			$entity68->acronym = " ENMH ";
-			$entity68->level = "Unidades Académicas del Nivel Superior";
+			$entity68->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity68);
 
 			$entity69 = new stdClass();
 			$entity69->name = "Escuela Superior de Enfermería y Obstetricia";
 			$entity69->acronym = " ESEO ";
-			$entity69->level = "Unidades Académicas del Nivel Superior";
+			$entity69->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity69);
 
 			$entity70 = new stdClass();
 			$entity70->name = "Centro Interdisciplinario de Ciencias de la Salud";
 			$entity70->acronym = " Milpa Alta";
-			$entity70->level = "Unidades Académicas del Nivel Superior";
+			$entity70->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity70);
 
 			$entity71 = new stdClass();
 			$entity71->name = "Centro Interdisciplinario de Ciencias de la Salud";
 			$entity71->acronym = " Santo Tomás";
-			$entity71->level = "Unidades Académicas del Nivel Superior";
+			$entity71->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity71);
 
 			$entity72 = new stdClass();
 			$entity72->name = "Escuela Superior de Comercio y Administración";
 			$entity72->acronym = " ESCA Santo Tomás";
-			$entity72->level = "Unidades Académicas del Nivel Superior";
+			$entity72->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity72);
 
 			$entity73 = new stdClass();
 			$entity73->name = "Escuela Superior de Comercio y Administración";
 			$entity73->acronym = " ESCA Tepepan";
-			$entity73->level = "Unidades Académicas del Nivel Superior";
+			$entity73->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity73);
 
 			$entity74 = new stdClass();
 			$entity74->name = "Escuela Superior de Economía";
 			$entity74->acronym = " ESE ";
-			$entity74->level = "Unidades Académicas del Nivel Superior";
+			$entity74->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity74);
 
 			$entity75 = new stdClass();
 			$entity75->name = "Escuela Superior de Turismo";
 			$entity75->acronym = " EST ";
-			$entity75->level = "Unidades Académicas del Nivel Superior";
+			$entity75->level = "Unidades Académicas de Nivel Superior";
 			array_push($entities, $entity75);
 
 			$entity76 = new stdClass();

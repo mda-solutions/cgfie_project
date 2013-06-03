@@ -21,7 +21,9 @@
 	            ->add('email_ipn', null, array('label'=> 'Email IPN'))
 	            ->add('gender', 'choice', array('label' => 'Sexo','choices' => CgfieUsersConfig::getGender()))
 	            ->add('level', 'choice', array('label' => 'Nivel','choices' => CgfieUsersConfig::getLevel()))
-	            ->add('type', 'choice', array('label' => 'Tipo de Usuario','choices' => CgfieUsersConfig::getType()))
+	            ->add('type', 'choice', array('label' => 'Tipo de Usuario','choices' => CgfieUsersConfig::getType()))	            
+	            ->add('is_teacher', null, array('label' => 'Es facilitador?'))
+	            ->add('cgfie_entity', 'sonata_type_model', array('label' => 'Unidad de Procedencia'), array())
 	        ;
 	    }
 

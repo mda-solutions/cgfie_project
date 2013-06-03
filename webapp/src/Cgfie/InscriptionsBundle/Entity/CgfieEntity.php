@@ -46,7 +46,6 @@ class CgfieEntity
      */
     private $level;
 
-
     /**
      * Get id
      *
@@ -125,4 +124,10 @@ class CgfieEntity
     {
         return $this->level;
     }
+
+    public function  __toString()
+    {
+        return sprintf("%s - %s", $this->getAcronym(), $this->getName());
+    }
+
 }

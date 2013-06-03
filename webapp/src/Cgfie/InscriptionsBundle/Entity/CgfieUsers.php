@@ -4,6 +4,7 @@ namespace Cgfie\InscriptionsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Cgfie\InscriptionsBundle\Entity\CgfieEntity;
 
 /**
  * CgfieUsers
@@ -94,6 +95,22 @@ class CgfieUsers
      * @Assert\NotBlank     
      */
     private $type;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_teacher", type="boolean")
+     * @Assert\NotBlank
+     */
+    private $is_teacher;        
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="CgfieEntity")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id")
+     **/
+     private $cgfie_entity;    
+
 
 
     /**
@@ -311,5 +328,56 @@ class CgfieUsers
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set cgfie_entity
+     *
+     * @param \Cgfie\InscriptionsBundle\Entity\CgfieEntity $cgfieEntity
+     * @return CgfieUsers
+     */
+    public function setCgfieEntity(\Cgfie\InscriptionsBundle\Entity\CgfieEntity $cgfieEntity = null)
+    {
+        $this->cgfie_entity = $cgfieEntity;
+
+        return $this;
+    }
+
+    /**
+     * Get cgfie_entity
+     *
+     * @return \Cgfie\InscriptionsBundle\Entity\CgfieEntity 
+     */
+    public function getCgfieEntity()
+    {
+        return $this->cgfie_entity;
+    }
+
+    /**
+     * Set is_teacher
+     *
+     * @param boolean $isTeacher
+     * @return CgfieUsers
+     */
+    public function setIsTeacher($isTeacher)
+    {
+        $this->is_teacher = $isTeacher;
+
+        return $this;
+    }
+
+    /**
+     * Get is_teacher
+     *
+     * @return boolean 
+     */
+    public function getIsTeacher()
+    {
+        return $this->is_teacher;
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s %s %s', $this->getName(), $this->getLastname(), $this->getLastname2());        
     }
 }
