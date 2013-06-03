@@ -231,6 +231,12 @@
           </div>
         </div>
 
+       <div class="row">
+          <div class="large-12 columns" style="padding-top:20px;">
+            <a href="javascript:void(0);" id="save_data" class="medium button radius">Guardar</a>
+          </div>
+        </div>
+
   </div>
 </div>
         </fieldset>
@@ -360,15 +366,38 @@
             placeholder: "Seleccione una sede",
             allowClear: true          
         });      
-       
+      
+      $('#save_data').on('click', function()
+      {
+
+        var _url          = "{{ path('cgfie_inscriptions_add') }}";
+        var courseId      = $('#courseID').select2('val');
+        var courseEntity  = $('#course_entity').select2('val');
+        var courseTeacher = $('#course_teacher').select2('val');
+        var _begin        = $('#course_date_start').val();
+        var _end          = $('#course_date_end').val();
+      
+        var _data = { 
+                    course_id : courseId, 
+                    entity_id: courseEntity, 
+                    teacher_id : courseTeacher, 
+                    begin: _begin,
+                    end: _end,
+                  };
+
+            $.ajax({
+              type: "POST",
+              url: _url,
+              data: _data,
+            });        
+      });       
 
       $('#courseID').on('change', function()
       {
-          var _url = "{{ path('cgfie_inscriptions_course') }}/" + $(this).val();
-          
+          var _url = "{{ path('cgfie_inscriptions_course') }}/" + $(this).val();          
 
           $("fieldset#step01").append('<div id="overlay"></div>');
-          
+                    
           var overlay = $('#overlay')
           overlay.css('width', $(document).width());
           overlay.css('height', $(document).height());
