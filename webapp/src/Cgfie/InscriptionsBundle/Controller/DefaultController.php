@@ -134,8 +134,25 @@ class DefaultController extends Controller
         {
             foreach ($PUPILS as $pupil) 
             {
+
+                /*
+                    array(1) {
+                      [0]=>
+                      array(4) {
+                        ["id"]=>
+                        string(1) "1"
+                        ["asistencia"]=>
+                        string(1) "5"
+                        ["acreditacion"]=>
+                        string(1) "0"
+                        ["calificacion"]=>
+                        string(1) "0"
+                      }
+                    }
+
+                */
                 
-            }
+            }   
         }
 
         return new Response(var_dump($PUPILS));
