@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cgfieinscriptions/css/metallic.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cgfieinscriptions/select2/select2.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cgfieinscriptions/js/jgrowl/jquery.jgrowl.css') }}" />
-
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Marmelad">
     <!--required JS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="//knockoutjs.com/downloads/knockout-2.2.1.js"></script>
@@ -26,7 +26,9 @@
 
      .row_even
      {
-      background-color: #F0F0F0; color: #666666;
+        background-color: #457a1a; color: white;
+        height: 30px;
+        padding: 5px;
      }
 
      .row_odd
@@ -39,10 +41,24 @@
   <body>
     <img id="loader" src="{{ asset('bundles/cgfieinscriptions/images/ajax-loader.gif') }}" style="display:none;position: absolute;top: 25px;left: 395px;"/>
 
-    <h2>Evaluación de la Acción de Formación</h2>    
+<div class="row">
+  <div class="large-3 columns">
+    <img width="203" src="{{ asset('bundles/cgfieinscriptions/images/cgfie_logo.jpg') }}"  alt="CGFIE - Logo" />
+  </div>
+  <div class="large-9 columns">
+    <h3 class="subheader" style="font-family: 'Marmelad', sans-serif;padding-top: 25px;">          
+          Formato de Evaluación de la Acción de Formación          
+    </h3> 
+  </div>
+</div>
+
+  
+
+
     <form class="custom">
-        <fieldset id="step01" >
-          <legend>Acción de Formación</legend>
+      <div class="row" style="height:30px;"></div>
+        <fieldset id="step01" style ="width: 1000px; border: solid 1px green; margin: 0px auto 0px auto;" >
+          <legend style="font-family: 'Marmelad', sans-serif; font-weight: normal;">Acción de Formación</legend>
           <div class="row">
             <div class="large-6 columns">
 
@@ -103,7 +119,6 @@
                </div> 
           </div>
 
-
             <div class="row">
                <div class="large-6 columns">
                   <label>Clave única de Registro: (CUR)</label>
@@ -114,8 +129,10 @@
           </div>
        </fieldset>
 
-        <fieldset id="step02" >
-          <legend>Participantes</legend>
+       <div class="row" style="height:30px"></div>
+
+        <fieldset id="step02" style ="width: 1000px; border: solid 1px green; margin: 0px auto 0px auto;" >
+          <legend style="font-family: 'Marmelad', sans-serif; font-weight: normal;">Participantes</legend>
 
           <div class="row">
             <div class="large-6 columns">
