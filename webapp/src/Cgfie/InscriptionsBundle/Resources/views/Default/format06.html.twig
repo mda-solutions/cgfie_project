@@ -41,6 +41,10 @@
   <body>
     <img id="loader" src="{{ asset('bundles/cgfieinscriptions/images/ajax-loader.gif') }}" style="display:none;position: absolute;top: 25px;left: 395px;"/>
 
+<div id="alert_success" style="border:solid 1px green; padding:15px;background: green; color:white; text-align: center; display:none;">
+  El formato se guardó con éxito. Puede <a href="{{ path('cgfie_inscriptions_format06') }}" style="color:white; text-decoration:underline"> Dar de alta un formato nuevo. </a>
+</div>
+
 <div class="row">
   <div class="large-3 columns">
     <img width="203" src="{{ asset('bundles/cgfieinscriptions/images/cgfie_logo.jpg') }}"  alt="CGFIE - Logo" />
@@ -186,7 +190,7 @@
   <div class="large-12 columns">
 
         <div class="row row_odd" data-bind="foreach: pupils">
-          <input type="hidden" name="pupils[]" value="" data-bind="value: id">
+          <input type="hidden" name="pupils[]" value="" data-bind="value: id" class="hidden_pupils">
           <div class="large-1 columns" style="padding-top:18px">
             <input type="checkbox" data-customforms="disabled" class="selected_items" value="" data-bind="value: id"/>
           </div>
@@ -241,7 +245,7 @@
           
           <div class="large-12 columns" style="padding-top:20px;">
             <a href="javascript:void(0);" id="save_data" class="medium button radius" style="float:right;">Guardar y Cerrar</a>
-            <a href="javascript:void(0);" id="save_data_edit" class="medium button radius success" style="float:right; margin-right: 10px;">Guardar y Seguir Editando</a>
+            <!--a href="javascript:void(0);" id="save_data_edit" class="medium button radius success" style="float:right; margin-right: 10px;">Guardar y Seguir Editando</a-->
           </div>
 
         </div>
@@ -392,7 +396,7 @@
               {
                   if(input.attr('name') != "course_pupil")
                   {                        
-                    console.log('campo: '+ input.attr('name') + '|| Valor:'+ input.val());
+                   // console.log('campo: '+ input.attr('name') + '|| Valor:'+ input.val());
 
                     if(input.val() == 0 || input.val() == "")
                     {
@@ -414,24 +418,64 @@
                           }
                       }                        
 
-                      valid = false;                                        
+                      valid = false; 
+
                     }                     
                   }
               }
           });
 
-          console.log(valid);
+        if(valid)
+        {
+          var pupils = $('.hidden_pupils');
+          if(pupils.length == 0)
+          {
+            valid = false;
+          }
+        }
 
           return valid;
+      }  
+
+      var loading = function()
+      {
+          $("fieldset#step01").append('<div id="overlay"></div>');
+
+          var overlay = $('#overlay')
+          overlay.css('width', $(document).width());
+          overlay.css('height', $(document).height());
+          overlay.css('background-color', 'white');
+          overlay.css('position', 'fixed');
+          overlay.css('left', '0');
+          overlay.css('top', '0');
+          overlay.css('opacity', '.8');
+          overlay.css('z-index', '100');
+          overlay.fadeIn('fast');
+
+          var loader = $('#loader');
+          loader.fadeIn();
+          loader.css('margin-left', 'auto');
+          loader.css('margin-right', 'auto');
+          loader.css('margin-top', 'auto');
+          loader.css('left', '0');
+          loader.css('right', '0');
+          loader.css('top', '50%');
+          loader.css('position', 'absolute');
+          loader.css('z-index', '9999');
       }      
+
       
       $('#save_data').on('click', function()
       {
 
-        if(!validate())
+        var is_valid = validate()
+        if(!is_valid)
         {
+            $.jGrowl("Debe proporcionar todos los datos.");
             return false;
         }
+
+        loading();
 
         var _url          = "{{ path('cgfie_inscriptions_add') }}";
         var courseId      = $('#courseID').select2('val');
@@ -480,37 +524,28 @@
               type: "POST",
               url: _url,
               data: _data,
+              success: function(data)
+              {
+                $('#loader').fadeOut('fast');
+                $('#overlay').fadeOut('fast', function()
+                {
+
+                  $('#overlay').remove();
+                  $('#alert_success').fadeIn('fast');
+                  $('#save_data').remove();
+                  $('body').scrollTop(0);
+
+                });
+              }
             });        
-      });       
+      }); 
 
       $('#courseID').on('change', function()
       {
           var _url = "{{ path('cgfie_inscriptions_course') }}/" + $(this).val();          
 
-          $("fieldset#step01").append('<div id="overlay"></div>');
+          loading();
 
-          var overlay = $('#overlay')
-          overlay.css('width', $(document).width());
-          overlay.css('height', $(document).height());
-          overlay.css('background-color', 'white');
-          overlay.css('position', 'fixed');
-          overlay.css('left', '0');
-          overlay.css('top', '0');
-          overlay.css('opacity', '.8');
-          overlay.css('z-index', '100');
-          overlay.fadeIn('fast');
-
-          var loader = $('#loader');
-          loader.fadeIn();
-          loader.css('margin-left', 'auto');
-          loader.css('margin-right', 'auto');
-          loader.css('margin-top', 'auto');
-          loader.css('left', '0');
-          loader.css('right', '0');
-          loader.css('top', '50%');
-          loader.css('position', 'absolute');
-          loader.css('z-index', '9999');
-               
           $.ajax({
             dataType: "json",
             url: _url,
@@ -522,7 +557,7 @@
               $('#course_hours').val(data.hours);
 
               $('#loader').fadeOut('fast');
-              overlay.fadeOut('fast', function()
+              $('#overlay').fadeOut('fast', function()
               {
                 $('#overlay').remove();
               });
