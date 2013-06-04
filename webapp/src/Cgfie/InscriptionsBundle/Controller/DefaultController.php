@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityRepository;
 
 use Cgfie\InscriptionsBundle\Entity\Inscription;
 use Cgfie\InscriptionsBundle\Entity\CgfieEntity;
+use Cgfie\InscriptionsBundle\Entity\InscriptionUsers;
 
 
 class DefaultController extends Controller
@@ -135,7 +136,6 @@ class DefaultController extends Controller
             foreach ($PUPILS as $pupil) 
             {
 
-                //$em = $this->getDoctrine()->getEntityManager();
                 $USERS = $this->getDoctrine()
                               ->getRepository('CgfieInscriptionsBundle:InscriptionUsers')
                               ->findByInscription($inscription);
@@ -150,24 +150,14 @@ class DefaultController extends Controller
                     $em->flush();                    
                 }
 
+                $_pupil = new InscriptionUsers();
+                $_pupil->setInscription($inscription);
+                $_pupil->setAssiduity((int)$pupil['asistencia']);
+                $_pupil->setAccreditation((int)$pupil['acreditacion']);
+                $_pupil->setQualification((int)$pupil['calificacion']);
 
-                /*
-                    array(1) {
-                      [0]=>
-                      array(4) {
-                        ["id"]=>
-                        string(1) "1"
-                        ["asistencia"]=>
-                        string(1) "5"
-                        ["acreditacion"]=>
-                        string(1) "0"
-                        ["calificacion"]=>
-                        string(1) "0"
-                      }
-                    }
-
-                */
-                
+                $em->persist($_pupil);
+                $em->flush();                                
             }   
         }
 
