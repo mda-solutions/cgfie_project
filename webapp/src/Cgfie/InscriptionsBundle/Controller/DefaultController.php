@@ -32,7 +32,10 @@ class DefaultController extends Controller
             array_push($PERCENTS, $i);
         }
 
-        $AGREE = array('ACREDITÓ', 'NO ACREDITÓ');
+        $AGREE = array(
+                        'Acreditó'    => 1, 
+                        'No Acreditó' => 0
+                      );
         $CALS  = array( 
                         '0 (CERO)'      => 0,
                         '1 (UNO)'       => 1,

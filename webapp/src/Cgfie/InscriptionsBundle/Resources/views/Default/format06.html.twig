@@ -198,8 +198,8 @@
               <div class="large-3 columns" style="padding-top:18px;margin-left: 40px;">
                     <select>
                         <option value="0">-Seleccione-</option>
-                        {% for number in AGREE %}
-                            <option value="{{number}}"> {{number}}</option>>
+                        {% for number, value in AGREE %}
+                            <option value="{{value}}"> {{number}}</option>>
                         {% endfor %}
                     </select>                  
               </div>
@@ -207,8 +207,8 @@
               <div class="large-3 columns" style="padding-top:18px;margin-right: 40px;">
                     <select>
                         <option value="0">-Seleccione-</option>
-                        {% for number in CALS|keys %}
-                            <option value="{{number}}"> {{number}}</option>>
+                        {% for number, value in CALS|keys %}
+                            <option value="{{number}}"> {{value}}</option>>
                         {% endfor %}
                     </select>     
               </div>                            
