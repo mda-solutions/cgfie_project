@@ -46,24 +46,24 @@ services:
         calls:
             - [ setTranslationDomain, [CgfieInscriptionsBundle]]
 
-    cgfie_inscriptions.admin.inscription:
-        class: Cgfie\InscriptionsBundle\Admin\InscriptionAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: CGFIE, label: "Formatos" }
-        arguments:
-            - ~ 
-            - Cgfie\InscriptionsBundle\Entity\Inscription
-            - 'SonataAdminBundle:CRUD'    
-        calls:
-            - [ setTranslationDomain, [CgfieInscriptionsBundle]]
+#    cgfie_inscriptions.admin.inscription:
+#        class: Cgfie\InscriptionsBundle\Admin\InscriptionAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: CGFIE, label: "Formatos" }
+#        arguments:
+#            - ~ 
+#            - Cgfie\InscriptionsBundle\Entity\Inscription
+#            - 'SonataAdminBundle:CRUD'    
+#        calls:
+#            - [ setTranslationDomain, [CgfieInscriptionsBundle]]
 
-    cgfie_inscriptions.admin.inscription_users:
-        class: Cgfie\InscriptionsBundle\Admin\InscriptionUsersAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: CGFIE, label: "Formatos-Usuarios" }
-        arguments:
-            - ~ 
-            - Cgfie\InscriptionsBundle\Entity\InscriptionUsers
-            - 'SonataAdminBundle:CRUD'    
-        calls:
-            - [ setTranslationDomain, [CgfieInscriptionsBundle]]
+#    cgfie_inscriptions.admin.inscription_users:
+#        class: Cgfie\InscriptionsBundle\Admin\InscriptionUsersAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: CGFIE, label: "Formatos-Usuarios" }
+#        arguments:
+#            - ~ 
+#            - Cgfie\InscriptionsBundle\Entity\InscriptionUsers
+#            - 'SonataAdminBundle:CRUD'    
+#        calls:
+#            - [ setTranslationDomain, [CgfieInscriptionsBundle]]
