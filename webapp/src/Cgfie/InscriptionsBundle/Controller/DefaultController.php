@@ -70,10 +70,43 @@ class DefaultController extends Controller
 
     public function addinscriptionAction(Request $request)
     {
-        $course         = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:Course')->find($request->request->get('course_id'));
-        $cgfieentity    = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieEntity')->find($request->request->get('entity_id'));
-        $teacher        = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieUsers')->find($request->request->get('teacher_id'));
+
+        $course_id      = $request->request->get('course_id');
+        $entity_id      = $request->request->get('entity_id');
+        $teacher_id     = $request->request->get('teacher_id');
+
+        if($course_id == null || $course_id < 1)
+        {
+            throw new \Exception('No se especificó el id de curso');
+        }
+        if($entity_id == null || $entity_id < 1)
+        {
+            throw new \Exception('No se especificó el id de sede');
+        }
+        if($teacher_id == null || $teacher_id < 1)
+        {
+            throw new \Exception('No se especificó el id de facilitador');
+        }
+
+        $course         = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:Course')->find($course_id);
+        $cgfieentity    = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieEntity')->find($entity_id);
+        $teacher        = $this->getDoctrine()->getRepository('CgfieInscriptionsBundle:CgfieUsers')->find($teacher_id);
         
+
+        if(!$course)
+        {
+            throw new \Exception('No existe el curso.');   
+        }
+
+        if(!$cgfieentity)
+        {
+            throw new \Exception('No existe la sede.');   
+        }
+
+        if(!$teacher)
+        {
+            throw new \Exception('No existe el facilitador.');   
+        }
 
         $inscription = new Inscription();            
         $inscription->setCourse($course);
@@ -86,8 +119,10 @@ class DefaultController extends Controller
         $em->persist($inscription);
         $em->flush();
 
-        $serializer = $this->container->get('serializer');
-        return new Response($serializer->serialize($inscription, 'json'));
+        
+
+        //$serializer = $this->container->get('serializer');
+        //return new Response($serializer->serialize($inscription, 'json'));
 
     }
 }
