@@ -16,7 +16,7 @@ services:
     cgfie_inscriptions.admin.course:
         class: Cgfie\InscriptionsBundle\Admin\CourseAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: CGFIE, label: "Cursos" }
+            - { name: sonata.admin, manager_type: orm, group: CGFIE, label: "Acciones de Formación" }
         arguments:
             - ~ 
             - Cgfie\InscriptionsBundle\Entity\Course
