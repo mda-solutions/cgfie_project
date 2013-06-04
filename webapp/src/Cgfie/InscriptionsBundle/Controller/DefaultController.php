@@ -135,6 +135,22 @@ class DefaultController extends Controller
             foreach ($PUPILS as $pupil) 
             {
 
+                //$em = $this->getDoctrine()->getEntityManager();
+                $USERS = $this->getDoctrine()
+                              ->getRepository('CgfieInscriptionsBundle:InscriptionUsers')
+                              ->findByInscription($inscription);
+
+                if(count($USERS) > 0)
+                {
+                    foreach ($USERS as $user) 
+                    {
+                        $em->remove($user);
+                    }
+                    
+                    $em->flush();                    
+                }
+
+
                 /*
                     array(1) {
                       [0]=>
