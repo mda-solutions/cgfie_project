@@ -21,7 +21,7 @@
 
       BODY, HTML
       {
-        overflow-x: hidden;
+       
       }
 
      .row_even
@@ -145,17 +145,10 @@
                 </select>
             </div>
 
-            <div class="large-2 columns" style="padding-top:10px;">
-              <a id="add_pupil" href="#" class="button small radius success"  data-bind="click: addPupil">Agregar al listado</a>
+            <div class="large-6 columns" style="padding-top:10px;">
+              <a id="add_pupil" href="#" class="button tiny secondary radius" style="margin-top:10px;"  data-bind="click: addPupil">Agregar al listado</a>
             </div>
-
-            <div class="large-2 columns"  style="padding-top:10px;">
-
-            </div>            
-
-            <div class="large-2 columns"  style="padding-top:18px;">
-              &nbsp;
-            </div>                        
+                      
         </div>
 
         <div class="row">
@@ -240,15 +233,19 @@
           </div>
         </div>
 
-       <div class="row">
-          <div class="large-12 columns" style="padding-top:20px;">
-            <a href="javascript:void(0);" id="save_data" class="medium button radius">Guardar</a>
-          </div>
-        </div>
-
   </div>
 </div>
         </fieldset>
+
+       <div class="row">
+          
+          <div class="large-12 columns" style="padding-top:20px;">
+            <a href="javascript:void(0);" id="save_data" class="medium button radius" style="float:right;">Guardar y Cerrar</a>
+            <a href="javascript:void(0);" id="save_data_edit" class="medium button radius success" style="float:right; margin-right: 10px;">Guardar y Seguir Editando</a>
+          </div>
+
+        </div>
+
     </form>
   <script>
     $(function()
