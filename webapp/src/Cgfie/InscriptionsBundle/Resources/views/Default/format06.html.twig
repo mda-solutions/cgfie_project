@@ -276,11 +276,16 @@
           var match = ko.utils.arrayFirst(self.pupils(), function(item)
           {
               return id === item.id;
-          });          
+          }); 
 
           if(!match)
           {
-            self.pupils.push(new Pupil(name, id));  
+            
+            if(id > 0)
+            {
+              self.pupils.push(new Pupil(name, id));    
+            }
+            
           }else
           {
 
@@ -373,10 +378,40 @@
         {
             placeholder: "Seleccione una sede",
             allowClear: true          
-        });      
+        });
+
+
+      var validate = function()
+      {
+          var elements = $('FORM :input');
+          var valid    = true;
+          $.each(elements, function()
+          {
+              var input = $(this);
+              if(input.attr('name') != undefined)
+              {
+
+                  console.log('campo: '+ input.attr('name') + '|| Valor:'+ input.val());
+
+                  if(input.val() == 0 || input.val() == "")
+                  {
+                    valid = false;                                        
+                  }     
+              }
+          });
+
+          console.log(valid);
+
+          return valid;
+      }      
       
       $('#save_data').on('click', function()
       {
+
+        if(!validate())
+        {
+            return false;
+        }
 
         var _url          = "{{ path('cgfie_inscriptions_add') }}";
         var courseId      = $('#courseID').select2('val');
