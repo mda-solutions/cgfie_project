@@ -375,9 +375,28 @@
         var pupilsData  = Array();
         $.each(pupilsCollection, function()
         {
-            var pupil = $(this);
-            pupilsData.push(pupil.val());
+            
+            var pupil     = $(this);
+            var data      = pupil.next().next().next();
+            var columns   = data.children().children();
+            var selects   = $(columns).find('SELECT');
+
+            var s1        = selects.first();
+            var s2        = selects.eq(1);
+            var s3        = selects.last();
+
+            _pupil       = 
+                          {
+                            id:           pupil.val(),
+                            asistencia:   s1.val(),
+                            acreditacion: s2.val(),
+                            calificacion: s3.val(),
+                          }
+
+            pupilsData.push(_pupil);
+
         });
+
      
         var _data = { 
                     course_id : courseId, 
