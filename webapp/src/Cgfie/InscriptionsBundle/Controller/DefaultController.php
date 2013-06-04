@@ -119,7 +119,23 @@ class DefaultController extends Controller
         $em->persist($inscription);
         $em->flush();
 
-        
+        if($inscription->getId() < 1)
+        {
+             throw new \Exception('Hubo un error al guardar el formato.');           
+        }
+
+        //save pupils
+
+        $PUPILS     = $request->request->get('pupils');
+        if(count($PUPILS) > 0)
+        {
+            foreach ($PUPILS as $pupil) 
+            {
+                
+            }
+        }
+
+        return new Response(var_dump($PUPILS));
 
         //$serializer = $this->container->get('serializer');
         //return new Response($serializer->serialize($inscription, 'json'));

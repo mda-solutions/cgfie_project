@@ -111,9 +111,6 @@
                </div>
             </div>
 
-            
-
-
           </div>
        </fieldset>
 
@@ -373,13 +370,22 @@
         var courseTeacher = $('#course_teacher').select2('val');
         var _begin        = $('#course_date_start').val();
         var _end          = $('#course_date_end').val();
-      
+
+        var pupilsCollection = $('input[name="pupils[]"]');
+        var pupilsData  = Array();
+        $.each(pupilsCollection, function()
+        {
+            var pupil = $(this);
+            pupilsData.push(pupil.val());
+        });
+     
         var _data = { 
                     course_id : courseId, 
                     entity_id: courseEntity, 
                     teacher_id : courseTeacher, 
                     begin: _begin,
                     end: _end,
+                    pupils: pupilsData,
                   };
 
             $.ajax({
