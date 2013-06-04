@@ -35,7 +35,7 @@ class DefaultController extends Controller
 
         $AGREE = array(
                         'Acreditó'    => 1, 
-                        'No Acreditó' => 0
+                        'No Acreditó' => 2
                       );
         $CALS  = array( 
                         '0 (CERO)'      => 0,

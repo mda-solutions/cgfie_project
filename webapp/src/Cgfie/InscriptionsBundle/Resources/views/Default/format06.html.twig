@@ -197,7 +197,7 @@
 
             <div class="row" >
               <div class="large-3 columns" style="padding-top:18px; display: inline;">   
-                    <select >
+                    <select name="percents">
                         <option value="0">-Seleccione-</option>
                         {% for number in PERCENTS %}
                             <option value="{{number}}"> {{number}} % </option>>
@@ -206,7 +206,7 @@
               </div>
 
               <div class="large-3 columns" style="padding-top:18px;margin-left: 40px;">
-                    <select>
+                    <select name="agree">
                         <option value="0">-Seleccione-</option>
                         {% for number, value in AGREE %}
                             <option value="{{value}}"> {{number}}</option>>
@@ -215,7 +215,7 @@
               </div>
 
               <div class="large-3 columns" style="padding-top:18px;margin-right: 40px;">
-                    <select>
+                    <select name="cals">
                         <option value="0">-Seleccione-</option>
                         {% for number, value in CALS|keys %}
                             <option value="{{number}}"> {{value}}</option>>
@@ -388,15 +388,35 @@
           $.each(elements, function()
           {
               var input = $(this);
-              if(input.attr('name') != undefined)
+              if(input.attr('name') != undefined )
               {
+                  if(input.attr('name') != "course_pupil")
+                  {                        
+                    console.log('campo: '+ input.attr('name') + '|| Valor:'+ input.val());
 
-                  console.log('campo: '+ input.attr('name') + '|| Valor:'+ input.val());
+                    if(input.val() == 0 || input.val() == "")
+                    {
+                      if(input.attr('name') == "percents")
+                      {
+                          var text_ = input.find('option:selected').text();
+                          if(text_ != "-Seleccione-") 
+                          {
+                             return;
+                          }
+                      }  
 
-                  if(input.val() == 0 || input.val() == "")
-                  {
-                    valid = false;                                        
-                  }     
+                      if(input.attr('name') == "cals")
+                      {
+                          var text_ = input.find('option:selected').text();
+                          if(text_ != "-Seleccione-") 
+                          {
+                             return;
+                          }
+                      }                        
+
+                      valid = false;                                        
+                    }                     
+                  }
               }
           });
 
