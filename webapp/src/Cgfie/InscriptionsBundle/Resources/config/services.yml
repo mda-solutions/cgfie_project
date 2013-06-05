@@ -2,6 +2,13 @@ parameters:
     #gender: ['Masculino' ,'Femenino']
 
 services:
+
+#    sonata.block.service.format06:
+#        class: Cgfie\InscriptionsBundle\Block\Format06BlockService
+#        arguments: [ "sonata.block.service.format06", @templating ]
+#        tags:
+#            - { name: sonata.block }
+
     cgfie_inscriptions.admin.cgfie_users:
         class: Cgfie\InscriptionsBundle\Admin\CgfieUsersAdmin
         tags:
@@ -67,3 +74,5 @@ services:
 #            - 'SonataAdminBundle:CRUD'    
 #        calls:
 #            - [ setTranslationDomain, [CgfieInscriptionsBundle]]
+
+
